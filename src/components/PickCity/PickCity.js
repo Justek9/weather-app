@@ -1,20 +1,26 @@
-import Button from '../Button/Button';
-import TextInput from '../TextInput/TextInput';
-import styles from './PickCity.module.scss';
+import Button from '../Button/Button'
+import TextInput from '../TextInput/TextInput'
+import styles from './PickCity.module.scss'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
-const PickCity = () => {
-  const [city, setCity] = useState('');
+const PickCity = ({ handleCityChange }) => {
+	const [city, setCity] = useState('')
 
-  return (
-    <form className={styles.pickCityForm}> 
-      <label>
-        <TextInput placeholder="Enter city name...." value={city} onChange={e => setCity(e.target.value)} />
-      </label>
-      <Button>Search</Button>
-    </form>
-  );
-};
+	const handleSubmit = e => {
+		e.preventDefault()
+		handleCityChange(city)
+		setCity('')
+	}
 
-export default PickCity;
+	return (
+		<form className={styles.pickCityForm} onSubmit={handleSubmit}>
+			<label>
+				<TextInput placeholder='Enter city name....' value={city} onChange={e => setCity(e.target.value)} />
+			</label>
+			<Button>Search</Button>
+		</form>
+	)
+}
+
+export default PickCity
